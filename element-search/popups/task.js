@@ -1,22 +1,16 @@
 'use strict'
 
-const showWindow = document.getElementById('modal_main');
-showWindow.className = 'modal modal_active';
 const modalClose = document.getElementsByClassName('modal__close modal__close_times');
-const showWindow1 = document.getElementById('modal_success');
-const btnDanger = document.getElementsByClassName('btn');
+modalClose[0].closest('div.modal').className = 'modal modal_active';
 
-
-modalClose[0].onclick = function() {
-    showWindow.className = 'modal';
+for(let i = 0; i < modalClose.length; i ++) {
+    modalClose[i].onclick = function() {
+        modalClose[i].closest('div.modal').className = 'modal';
+    }
 }
 
 
-btnDanger[0].onclick = function() {
-    showWindow1.className = 'modal modal_active';
-    showWindow.className = 'modal';
-}
-
-modalClose[1].onclick = function() {
-    showWindow1.className = 'modal';
+modalClose[0].closest('div.modal').querySelector('a').onclick = function() {
+    modalClose[0].closest('div.modal').className = 'modal';
+    modalClose[1].closest('div.modal').className = 'modal modal_active';
 }
