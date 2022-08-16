@@ -19,7 +19,7 @@ class Game {
 
   registerEvents() {
     addEventListener('keyup', event => {
-      if (String.fromCharCode(this.currentSymbol.textContent.toLowerCase()) === String.fromCharCode(event.key.toLowerCase())) {
+      if (this.currentSymbol.textContent.toLowerCase() === event.key.toLowerCase()) {
         this.success();
       } 
       else {

@@ -4,25 +4,17 @@ const links = document.querySelectorAll('li > a');
 const value = document.getElementsByClassName('dropdown__value')[0];
 const list = document.getElementsByClassName('dropdown__list')[0];
 
-value.addEventListener('click', openList);
-
+value.addEventListener('click', closeList);
 
 for (let i = 0; i < links.length; i ++) {
     links[i].onclick = function() {
-        closeList(i);
+        value.textContent = links[i].textContent;
+        closeList();
         return false;
     }
 }
 
 
-function openList() {
-        list.className = 'dropdown__list dropdown__list_active';
-    }
-
-
-function closeList(i) {
-        list.className = 'dropdown__list';
-        value.textContent = links[i].textContent;
-    }
-
-
+function closeList() {
+    list.classList.toggle('dropdown__list_active');
+}
