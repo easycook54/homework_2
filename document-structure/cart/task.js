@@ -1,44 +1,36 @@
 'use strict'
 
 const quantityvalue = Array.from(document.getElementsByClassName('product__quantity-value'));
-const controldec =Array.from(document.getElementsByClassName('product__quantity-control_dec'));
+const controldec = Array.from(document.getElementsByClassName('product__quantity-control_dec'));
 const controlinc = Array.from(document.getElementsByClassName('product__quantity-control_inc'));
 const productadd = Array.from(document.getElementsByClassName('product__add'));
 
 
 function addInBasket() {
     let cartproduct = document.createElement('div');
-    cartproduct.classList.add("cart__product");
+    cartproduct.classList.add('cart__product');
     cartproduct.dataset.id = this.closest('.product').dataset.id;
 
     let clonedImg = document.createElement('img');
     clonedImg.classList.add('cart__product-image');
     clonedImg.src = this.closest('.product__controls').previousElementSibling.src;
-    
     cartproduct.insertAdjacentHTML('afterBegin', clonedImg.outerHTML);
     
     let countdivs = document.createElement('div');
     countdivs.classList.add('cart__product-count');
     countdivs.textContent = this.previousElementSibling.getElementsByClassName('product__quantity-value')[0].textContent;
-    
     cartproduct.insertAdjacentHTML('beforeEnd', countdivs.outerHTML);
    
     let cart = Array.from(document.getElementsByClassName('cart__products'))[0];
-    let cartcontents = Array.from(cart.getElementsByClassName("cart__product"));
-    let cartlap = -1;
-
-    for (let i = 0; i < cartcontents.length; i++) {
-        if (cartcontents[i].dataset.id == cartproduct.dataset.id) {
-            cartlap = i;
-        } 
-    }
-
-    if (cartlap > -1) {
-        let cartContentsCountDiv = cartcontents[cartlap].getElementsByClassName("cart__product-count")[0];
-        cartContentsCountDiv.textContent = Number(cartContentsCountDiv.textContent) + Number(countDiv.textContent);
-    } else {
-        cart.insertAdjacentHTML("afterBegin", cartproduct.outerHTML);
-    }
+    let cartcontents = Array.from(cart.getElementsByClassName('cart__product'));
+    let checkproduct = cartcontents.find(elem => elem.dataset.id === cartproduct.dataset.id)
+    if (checkproduct != undefined) {
+        let number = checkproduct.querySelector('.cart__product-count').textContent;
+        checkproduct.querySelector('.cart__product-count').textContent = Number(number) + Number(countdivs.textContent);
+    return;
+        }
+        
+    cart.insertAdjacentHTML("afterBegin", cartproduct.outerHTML);
 }
 
 
